@@ -1,7 +1,53 @@
+/*****
+GLOBAL
+*****/
+
+* { 
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Open Sans', sans-serif; 
 }
 
+
+
+/*****
+SEARCH
+*****/
+
+#search {
+  text-align: center;
+  padding: 30px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#search input {
+  font-size: 16px;
+  border: solid 1px lightgrey;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+}
+
+::-webkit-input-placeholder { /* Chrome */
+  color: darkgrey;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: darkgrey;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: darkrey;
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: darkgrey;
+  opacity: 1;
+}
+::placeholder {
+  color: darkgrey;
+}
 
 
 /**********
