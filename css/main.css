@@ -50,14 +50,135 @@ SEARCH
 }
 
 
+
+/******
+GALLERY
+******/
+
+#gallery.flex {
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: flex; 
+  min-width: 300px;
+  max-width: 1200px;
+  -ms-flex-pack: distribute;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 5px;
+  /* custom */
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#gallery.flex img {
+  margin: 5px;
+}
+
+
+
+/*******
+LIGHTBOX
+*******/
+
+.lb-dataContainer {
+  width: 100% !important;
+  margin: 0;
+  padding: 20px;
+}
+
+.lb-data {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.lb-data .lb-details {
+  float: none;
+  width: auto;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.lb-data .lb-details .lb-caption {
+  display: inline;
+  text-align: left;
+  font-size: .75rem;
+  line-height: 1rem;
+}
+
+.lb-data a.lb-close {
+  display: none;
+}
+
+.lb-nav a.lb-next,
+.lb-nav a.lb-prev {
+  opacity: 1;
+  width: 40%;
+}
+
+.lb-nav a.lb-next.landscape {
+  margin-right: -100px;
+}
+
+.lb-nav a.lb-prev.landscape {
+  margin-left: -100px;
+}
+
+
+
 /**********
 BREAKPOINTS
 **********/
 
+@media screen and (min-width: 480px) {
+ 
+  #search {
+    margin-top: 10px;
+  }
+  
+  #gallery.flex img {
+    margin: 10px;
+  }
+
+}
+
 @media screen and (min-width: 768px) {
+ 
+  #search {
+    margin-top: 15px;
+  }
+
+  #gallery.flex img {
+    margin: 15px;
+  }
+  
+  .lb-data .lb-details .lb-caption {
+    font-size: 1rem;
+    line-height: 1.25rem;
+  }
 
 }
 
 @media screen and (min-width: 1024px) {
+
+  #search {
+    margin-top: 20px;
+  }
+   
+  #gallery.flex img {
+    margin: 20px;
+  }
+  
+}
+
+@media screen and (min-width: 1200px) {
+
+  #search {
+    margin-top: 30px;
+  }
+   
+  #gallery.flex img {
+    margin: 30px;
+  }
 
 }
