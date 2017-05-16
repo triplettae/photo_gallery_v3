@@ -21,12 +21,20 @@ function resizeViewport() {
   viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
   viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
   
-  if ((viewportWidth / viewportHeight) >= photoRatio) {
+  var viewportRatio = viewportWidth / viewportHeight;
+  
+  if ((viewportRatio) >= photoRatio) {
     $('.lb-nav a.lb-next').addClass('landscape');
     $('.lb-nav a.lb-prev').addClass('landscape');
   } else {
     $('.lb-nav a.lb-next').removeClass('landscape');
     $('.lb-nav a.lb-prev').removeClass('landscape');
+  }
+  
+  if ((viewportRatio < (photoRatio - 0.2)) || (viewportRatio > (photoRatio + 0.2))) {
+    $('.lb-data a.lb-close').hide();
+  } else {
+    $('.lb-data a.lb-close').show();
   }
   
 }
@@ -133,4 +141,12 @@ lightbox.option({
   'showImageNumberLabel': false,
   'alwaysShowNavOnTouchDevices': true
   
+});
+
+/***
+ * NOTE: I will implement my own search function using a jquery keypress handler.
+ */
+
+$('#search').keypress(function () {
+  console.log('Key pressed in search box.');
 });
