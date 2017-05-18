@@ -144,9 +144,27 @@ lightbox.option({
 });
 
 /***
- * NOTE: I will implement my own search function using a jquery keypress handler.
+ * NOTE: I tried to implement my own search function using a jquery keypress handler
+ * but I found that keypress fires before the value in the input element is updated
+ * so I switched to on input event
  */
 
-$('#search').keypress(function () {
-  console.log('Key pressed in search box.');
+$('#search input').on('input', function () {
+  
+  /***
+   * NOTE: My intent is to tokenize words and combine them with a logical OR so the user can
+   * enter several keywords or keyword fragments and photos containing those words/fragments
+   * in either the alt or caption strings will be displayed and others hidden. Fragments
+   * will only be matched against the start of each word in the alt or caption data.
+   */
+  
+  var input = this.value;
+  var tokens = input.split(' ');
+  
+  for (var index = 0, length = tokens.length; index < length; index++) {
+    
+      console.log(tokens[index]);
+                  
+  }
+
 });
