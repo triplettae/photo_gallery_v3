@@ -154,17 +154,32 @@ $('#search input').on('input', function () {
   /***
    * NOTE: My intent is to tokenize words and combine them with a logical OR so the user can
    * enter several keywords or keyword fragments and photos containing those words/fragments
-   * in either the alt or caption strings will be displayed and others hidden. Fragments
-   * will only be matched against the start of each word in the alt or caption data.
+   * in either the alt or caption strings will be displayed and others hidden. Hidden photos
+   * should not show up in lightbox.
    */
   
   var input = this.value;
-  var tokens = input.split(' ');
   
-  for (var index = 0, length = tokens.length; index < length; index++) {
+  if (input != '') {
     
-      console.log(tokens[index]);
-                  
+    var tokens = input.split(' ');
+    
+    $('#gallery a').hide().removeAttr('data-lightbox'); // hide all
+
+    for (var index = 0, length = tokens.length; index < length; index++) {
+
+      if (tokens[index] == '') continue; // skip blank tokens
+      
+      // I found that all the words in the alt tags are also in the caption
+
+      $('#gallery a[data-title*="' + tokens[index] +'" i]').show().attr('data-lightbox', 'gallery'); // show matches
+      
+    }
+    
+  } else {
+    
+    $('#gallery a').show().attr('data-lightbox', 'gallery'); // show all
+    
   }
 
 });
