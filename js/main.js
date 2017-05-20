@@ -1,6 +1,8 @@
-var thumbnails = 'photos/thumbnails/';
-var metadataURL = 'photos/photo_captions.txt';
-var metadata = {};
+/***
+ * NOTE: My initial submission worked only when served from a webserver. For grading purposes, the * page needs to be loaded offline from a local filesystem. As a result, I am hard-coding the
+ * gallery into the html and removing the ajax calls.
+ */
+
 var photoRatio = 1.6; //width/height of photos
 var viewportWidth;
 var viewportHeight;
@@ -43,73 +45,6 @@ $(window).on('resize', function () {
   
   clearTimeout(resizeViewportTimeout);
   resizeViewportTimeout = setTimeout(resizeViewport, 200);
-  
-});
-
-/***
- * NOTE: All of the metadata for the photos is provided in a txt file and I decided to extract
- * all the data using JS instead of copying and pasting it into the markup. This felt more
- * reusable anyway and allowed me to practice my JS programming skills!
- */
-
-$.ajax({
-  
-  url: metadataURL,
-  success: function (data) {
-    
-    var metaDataArray = data.split('\n');
-    
-    if ((metaDataArray.length + 1) % 4 == 0) { // length + 1 because there is no LF at end of file
-      
-      for (var index = 0; index < metaDataArray.length; index += 4) {
-        
-        metadata[metaDataArray[index]] = { 
-
-          'alt': metaDataArray[index+1],
-          'caption': metaDataArray[index+2]
-
-        };
-        
-      }
-      
-    }
-    
-  }
-  
-});
-
-/***
- * NOTE: I used regex matching to ensure the href attributes can contain either / or \
- * because PCs and Macs use different slashes for directories and $.ajax does not
- * standardize the returned URLs. Elements are constructed using the values pulled from
- * the caption file above.
- */
-
-$.ajax({
-  
-  url: thumbnails,
-  success: function (data) {
-    
-    $(data).find('a').attr('href', function (index, thumbnail) {
-      
-      if( thumbnail.match(/\.jpg$/) ) {
-        
-        var photo = thumbnail.replace('\/thumbnails', '').replace('\\thumbnails', '');
-        var filename = photo.match(/[^\\\/]+$/)[0];
-      
-        $('#gallery').append(
-          '<a ' +
-          'data-lightbox="gallery" ' +
-          'data-title="' + (metadata[filename] ? metadata[filename].caption : '') + '" ' +
-          'href="' + photo + '">' +
-          '<img src="' + thumbnail + '" ' +
-          'alt="' + (metadata[filename] ? metadata[filename].alt : '') + '"></a>');
-        
-      }
-      
-    });
-    
-  }
   
 });
 
