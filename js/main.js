@@ -117,7 +117,7 @@ $('#search input').on('input', function () {
 
       $('#gallery a[data-title]').filter(function () {
         
-        if ($(this).attr('data-title').toLowerCase().indexOf(tokens[index]) > -1) {
+        if ($(this).attr('data-title').toLowerCase().indexOf(tokens[index].toLowerCase()) > -1) {
           $(this).show().attr('data-lightbox', 'gallery');
         }
         
