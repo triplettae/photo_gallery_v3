@@ -89,8 +89,8 @@ $('#search input').on('input', function () {
   /***
    * NOTE: My intent is to tokenize words and combine them with a logical OR so the user can
    * enter several keywords or keyword fragments and photos containing those words/fragments
-   * in either the alt or caption strings will be displayed and others hidden. Hidden photos
-   * should not show up in lightbox.
+   * in the caption strings will be displayed and others hidden. Hidden photos should not
+   * show up in lightbox.
    */
   
   var input = this.value;
@@ -105,9 +105,23 @@ $('#search input').on('input', function () {
 
       if (tokens[index] == '') continue; // skip blank tokens
       
-      // I found that all the words in the alt tags are also in the caption
+      /***
+       * NOTE: this was more elegant in my opinion but did not work in IE. Firefox, Chrome, and
+       * Safari worked fine.
+       *
 
-      $('#gallery a[data-title*="' + tokens[index] +'" i]').show().attr('data-lightbox', 'gallery'); // show matches
+       $('#gallery a[data-title*="' + tokens[index] +'" i]').show().attr('data-lightbox', 'gallery'); 
+       
+       * The following approach should work for IE and Edge too.
+       */
+
+      $('#gallery a[data-title]').filter(function () {
+        
+        if ($(this).attr('data-title').toLowerCase().indexOf(tokens[index]) > -1) {
+          $(this).show().attr('data-lightbox', 'gallery');
+        }
+        
+      });
       
     }
     
